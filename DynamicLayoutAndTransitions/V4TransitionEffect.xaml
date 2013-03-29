@@ -1,0 +1,71 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	x:Class="DynamicLayoutAndTransitions.V4TransitionEffect"
+	d:DesignWidth="640" d:DesignHeight="480" mc:Ignorable="d">
+	<Grid x:Name="LayoutRoot">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.5*"/>
+			<ColumnDefinition Width="0.5*"/>
+		</Grid.ColumnDefinitions>
+		<VisualStateManager.CustomVisualStateManager>
+			<ei:ExtendedVisualStateManager/>
+		</VisualStateManager.CustomVisualStateManager>
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="States">
+				<VisualStateGroup.Transitions>
+					<VisualTransition From="StateA" GeneratedDuration="0:0:1" To="StateB">
+						<VisualTransition.GeneratedEasingFunction>
+							<CubicEase EasingMode="EaseOut"/>
+						</VisualTransition.GeneratedEasingFunction>
+						<ei:ExtendedVisualStateManager.TransitionEffect>
+							<ee:SmoothSwirlGridTransitionEffect/>
+						</ei:ExtendedVisualStateManager.TransitionEffect>
+					</VisualTransition>
+					<VisualTransition From="StateB" GeneratedDuration="0:0:1" To="StateA">
+						<VisualTransition.GeneratedEasingFunction>
+							<CubicEase EasingMode="EaseOut"/>
+						</VisualTransition.GeneratedEasingFunction>
+						<ei:ExtendedVisualStateManager.TransitionEffect>
+							<ee:WaveTransitionEffect/>
+						</ei:ExtendedVisualStateManager.TransitionEffect>
+					</VisualTransition>
+				</VisualStateGroup.Transitions>
+				<VisualState x:Name="StateA">
+					<Storyboard>
+						<ColorAnimation Duration="0" To="#FF5ED62F" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle"/>
+						<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock"/>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="StateB">
+					<Storyboard>
+						<ColorAnimation Duration="0" To="#FFCB2ED6" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle"/>
+						<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock1"/>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		<i:Interaction.Triggers>
+			<i:EventTrigger EventName="Loaded">
+				<ei:GoToStateAction StateName="StateA" UseTransitions="False"/>
+			</i:EventTrigger>
+		</i:Interaction.Triggers>
+		<TextBlock Margin="20,8,28,0" VerticalAlignment="Top" Text="V4 TransitionEffect" FontFamily="Segoe UI" FontSize="32" Foreground="#FFF0F0F0" d:LayoutOverrides="Width" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+		<Rectangle x:Name="rectangle" Fill="White" Margin="20,80,20,20" Stroke="Black" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2"/>
+		<Button Content="State A" Margin="20,60,0,0" FontFamily="Segoe UI" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="150" Background="White">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<ei:GoToStateAction StateName="StateA"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</Button>
+		<Button Content="State B" Margin="0,60,20,0" Grid.Column="1" FontFamily="Segoe UI" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Background="White">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<ei:GoToStateAction StateName="StateB"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</Button>
+		<TextBlock x:Name="textBlock" Grid.Column="0" Height="70" Margin="20,0,0,180" TextWrapping="Wrap" VerticalAlignment="Center" Text="Click here to go to State A" FontFamily="Segoe UI" FontSize="21.333" TextAlignment="Center" Width="150" HorizontalAlignment="Center"/>
+		<TextBlock x:Name="textBlock1" Grid.Column="1" Height="70" Margin="0,0,20,180" TextWrapping="Wrap" VerticalAlignment="Center" Text="Click here to go to State B" FontFamily="Segoe UI" FontSize="21.333" TextAlignment="Center" Width="150" HorizontalAlignment="Center"/>
+		<Slider x:Name="BehaviorSpeed" HorizontalAlignment="Right" Height="37" Margin="0,14,8,0" VerticalAlignment="Top" Width="75" Maximum="5" Grid.Column="1" Value="0.75"/>
+	</Grid>
+</UserControl>

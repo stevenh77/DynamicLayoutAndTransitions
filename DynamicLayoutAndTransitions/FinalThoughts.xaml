@@ -1,0 +1,21 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="DynamicLayoutAndTransitions.FinalThoughts"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot">
+		<Viewbox Margin="50">
+			<StackPanel>
+				<TextBlock HorizontalAlignment="Center" Text="Final Thoughts" FontFamily="Segoe UI" FontSize="96" Foreground="#FFF0F0F0"/>
+				<TextBlock HorizontalAlignment="Center" Text="Look for this project in the Expression Gallery" FontFamily="Segoe UI" FontSize="32" FontStyle="Italic" Foreground="#FFF0F0F0"/>
+				<TextBlock HorizontalAlignment="Center" Text="Interested in future Silverlight research? devur@microsoft.com
+" FontFamily="Segoe UI" FontSize="32" FontStyle="Italic" Foreground="#FFF0F0F0"/>
+				<TextBlock HorizontalAlignment="Center" Text="Please fill out an evaluation form!" FontFamily="Segoe UI" FontSize="32" FontStyle="Italic" Foreground="#FFF0F0F0"/>
+			</StackPanel>
+		</Viewbox>
+	</Grid>
+</UserControl>

@@ -1,0 +1,199 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	xmlns:demo="clr-namespace:DynamicLayoutAndTransitions"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	mc:Ignorable="d"
+	x:Class="DynamicLayoutAndTransitions.V3FluidLayout"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot">
+		<VisualStateManager.CustomVisualStateManager>
+			<ei:ExtendedVisualStateManager/>
+		</VisualStateManager.CustomVisualStateManager>
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="PaneVisibilityStates" ei:ExtendedVisualStateManager.UseFluidLayout="True">
+				<VisualStateGroup.Transitions>
+					<VisualTransition GeneratedDuration="0:0:1">
+						<VisualTransition.GeneratedEasingFunction>
+							<ElasticEase Oscillations="1"/>
+						</VisualTransition.GeneratedEasingFunction>
+					</VisualTransition>
+				</VisualStateGroup.Transitions>
+				<VisualState x:Name="AllVisible"/>
+				<VisualState x:Name="AllInvisible">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="States" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Collapsed</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Props" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Collapsed</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Timeline" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Collapsed</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+			<VisualStateGroup x:Name="PaneStates" ei:ExtendedVisualStateManager.UseFluidLayout="True">
+				<VisualStateGroup.Transitions>
+					<VisualTransition GeneratedDuration="0:0:1">
+						<VisualTransition.GeneratedEasingFunction>
+							<ElasticEase Oscillations="1"/>
+						</VisualTransition.GeneratedEasingFunction>
+					</VisualTransition>
+				</VisualStateGroup.Transitions>
+				<VisualState x:Name="TimelineAndStates">
+					<Storyboard>
+						<ColorAnimation Duration="0" To="#FFC0C0" Storyboard.TargetName="background" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"/>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Timeline" Storyboard.TargetProperty="(Grid.Row)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>3</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Timeline" Storyboard.TargetProperty="(Grid.RowSpan)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>2</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Timeline" Storyboard.TargetProperty="(Grid.ColumnSpan)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>1</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="States" Storyboard.TargetProperty="(Grid.RowSpan)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>2</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="TimelineOnTop">
+					<Storyboard>
+						<ColorAnimation Duration="0" To="#C0FFC0" Storyboard.TargetName="background" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"/>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Timeline" Storyboard.TargetProperty="(Grid.Row)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>1</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="States" Storyboard.TargetProperty="(Grid.Row)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>2</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="Normal"/>
+				<VisualState x:Name="MoreTimeline">
+					<Storyboard>
+						<ColorAnimation Duration="0" To="#C0C0FF" Storyboard.TargetName="background" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"/>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Timeline" Storyboard.TargetProperty="(Grid.ColumnSpan)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>3</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Props" Storyboard.TargetProperty="(Grid.RowSpan)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<sys:Int32>3</sys:Int32>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition MinWidth="1" Width="Auto"/>
+			<ColumnDefinition/>
+			<ColumnDefinition MinWidth="1" Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="80"/>
+			<RowDefinition Height="Auto" MinHeight="1"/>
+			<RowDefinition Height="0.5*"/>
+			<RowDefinition Height="0.5*"/>
+			<RowDefinition Height="Auto" MinHeight="1"/>
+		</Grid.RowDefinitions>
+		<TextBlock Margin="20,8,0,4" Text="V3 FluidLayout" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="32" Grid.ColumnSpan="3" Foreground="#FFF0F0F0"/>
+		<Slider x:Name="BehaviorSpeed" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.ColumnSpan="3" Height="37" Margin="0,14,20,0" Width="75" Maximum="5" Value="0.5"/>
+		<demo:Pane x:Name="States" Grid.Row="1" Grid.RowSpan="3" Title="States"/>
+		<demo:Pane x:Name="Props" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Title="Props"/>
+		<demo:Pane x:Name="Timeline" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Title="Timeline"/>
+		<Grid x:Name="Workspace" Margin="3" Grid.Column="1" Grid.RowSpan="2" Grid.Row="2">
+			<Rectangle x:Name="background" Fill="#FFFFFFFF" Stroke="#FF000000" RadiusX="15" RadiusY="15"/>
+			<StackPanel x:Name="RightStack" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top">
+				<CheckBox x:Name="VisibilityCheck" HorizontalAlignment="Right" Content="Panes Visible" FontSize="14.667" Width="Auto" IsChecked="True" FontFamily="Segoe UI">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="Unchecked">
+							<ei:GoToStateAction StateName="AllInvisible"/>
+						</i:EventTrigger>
+						<i:EventTrigger EventName="Checked">
+							<ei:GoToStateAction StateName="AllVisible"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</CheckBox>
+			</StackPanel>
+			<StackPanel x:Name="LeftStack" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top">
+				<Button FontSize="14.667" Margin="5" Style="{x:Null}" Content="Workspace 1" FontFamily="Segoe UI">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="Click">
+							<ei:GoToStateAction StateName="Normal"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</Button>
+				<Button FontSize="14.667" Margin="5" Style="{x:Null}" Content="Workspace 2" FontFamily="Segoe UI">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="Click">
+							<ei:GoToStateAction StateName="TimelineOnTop"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</Button>
+				<Button FontSize="14.667" Margin="5" Style="{x:Null}" Content="Workspace 3" FontFamily="Segoe UI">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="Click">
+							<ei:GoToStateAction StateName="TimelineAndStates"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</Button>
+				<Button FontSize="14.667" Margin="5" Style="{x:Null}" Content="Workspace 4" FontFamily="Segoe UI">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="Click">
+							<ei:GoToStateAction StateName="MoreTimeline"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</Button>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</UserControl>

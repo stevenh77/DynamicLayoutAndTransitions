@@ -1,0 +1,74 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:demo="clr-namespace:DynamicLayoutAndTransitions" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="DynamicLayoutAndTransitions.MainPage" d:DesignWidth="640" d:DesignHeight="480">
+
+	<UserControl.Resources>
+		<Style x:Key="SlideTemplate" TargetType="ContentControl">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ContentControl">
+						<Grid x:Name="grid" Background="{TemplateBinding Background}">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="LayoutStates">
+									<VisualStateGroup.Transitions>
+										<VisualTransition GeneratedDuration="0:0:0.75">
+											<VisualTransition.GeneratedEasingFunction>
+												<CubicEase EasingMode="EaseOut"/>
+											</VisualTransition.GeneratedEasingFunction>
+										</VisualTransition>
+									</VisualStateGroup.Transitions>
+									<VisualState x:Name="BeforeLoaded">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1000" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="grid"/>
+											<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="AfterLoaded"/>
+									<VisualState x:Name="BeforeUnloaded">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="-1000" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="grid"/>
+											<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Grid.RenderTransform>
+								<CompositeTransform/>
+							</Grid.RenderTransform>
+							<ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+	
+	<Grid x:Name="LayoutRoot" Background="#FF484848">
+		<demo:Slideshow x:Name="Slideshow" TransitionStyle="{StaticResource SlideTemplate}">
+			<Control.Template>
+				<ControlTemplate TargetType="demo:Slideshow">
+					<Grid>
+						<demo:TransitionContentControl Margin="0,60,0,0" Content="{TemplateBinding SelectedItem}" TransitionStyle="{TemplateBinding TransitionStyle}" Reversed="{TemplateBinding Reversed}"/>
+						<Rectangle Height="60" Fill="Black" VerticalAlignment="Top"/>
+						<Image HorizontalAlignment="Center" Margin="2,2,2,2" Height="56" Source="MIXlogo.PNG" Stretch="None" VerticalAlignment="Top"/>
+						<Button x:Name="PreviousButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="40" Margin="10,7,0,0" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" Background="Black" BorderBrush="{x:Null}" Foreground="White" Content="&lt;"/>
+						<Button x:Name="NextButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Height="40" Margin="0,7,10,0" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" Background="Black" BorderBrush="{x:Null}" Foreground="White" Content="&gt;"/>
+					</Grid>
+				</ControlTemplate>
+			</Control.Template>
+			<demo:Title/>
+			<demo:V3Title/>
+			<demo:V3FluidMoveBehavior/>
+		    <demo:V3FluidLayout/>
+			<demo:V4Title/>
+			<demo:V4LayoutStates/>
+			<demo:V4TransitionEffect/>
+			<demo:V4FluidMoveBehaviorMasterDetail/>
+			<demo:V4FluidMoveBehaviorListToList/>
+			<demo:FinalThoughts/>
+			<demo:Questions/>
+		</demo:Slideshow>
+	</Grid>
+</UserControl>

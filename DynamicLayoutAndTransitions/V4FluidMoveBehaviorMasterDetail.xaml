@@ -1,0 +1,40 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:DynamicLayoutAndTransitions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	x:Class="DynamicLayoutAndTransitions.V4FluidMoveBehaviorMasterDetail"
+	d:DesignWidth="640" d:DesignHeight="480" mc:Ignorable="d">
+	<UserControl.Resources>
+		<local:SecondsToDurationConverter x:Key="SecondsToDurationConverter"/>
+		<DataTemplate x:Key="ItemTemplate">
+			<Grid Width="200">
+				<Image Source="{Binding Image}" HorizontalAlignment="Right" Width="64" Margin="0">
+					<i:Interaction.Behaviors>
+						<ei:FluidMoveSetTagBehavior Tag="DataContext"/>
+					</i:Interaction.Behaviors>
+				</Image>
+				<TextBlock Text="{Binding Name}" Margin="0,4" VerticalAlignment="Top" d:LayoutOverrides="Width" FontFamily="Segoe UI" FontSize="14.667"/>
+				<TextBlock Text="{Binding Price}" VerticalAlignment="Top" d:LayoutOverrides="Width" Margin="0,25,0,0" FontFamily="Segoe UI" FontSize="14.667"/>
+			</Grid>
+		</DataTemplate>
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource ChairsDataSource}}">
+		<TextBlock Margin="20,8,0,0" VerticalAlignment="Top" Text="V4 FluidMoveBehavior" FontFamily="Segoe UI" FontSize="32" Foreground="#FFF0F0F0" HorizontalAlignment="Left" d:LayoutOverrides="HorizontalAlignment, GridBox"/>
+		<Slider x:Name="BehaviorSpeed" HorizontalAlignment="Right" Height="37" Margin="0,14,20,0" VerticalAlignment="Top" Width="71" Maximum="2" Value="0.75"/>
+		<ListBox x:Name="listBox" HorizontalAlignment="Left" ItemTemplate="{StaticResource ItemTemplate}" ItemsSource="{Binding Collection}" Margin="20,80,0,20" Width="228" Background="#FF333333" Foreground="#FFF0F0F0" BorderBrush="{x:Null}"/>
+		<Grid DataContext="{Binding SelectedItem, ElementName=listBox}" Margin="270,100,20,40" d:DataContext="{Binding Collection[0]}">
+			<i:Interaction.Behaviors>
+				<ei:FluidMoveBehavior InitialTag="DataContext" Duration="{Binding Value, Converter={StaticResource SecondsToDurationConverter}, ElementName=BehaviorSpeed}" FloatAbove="False">
+					<ei:FluidMoveBehavior.EaseY>
+						<CubicEase EasingMode="EaseIn"/>
+					</ei:FluidMoveBehavior.EaseY>
+					<ei:FluidMoveBehavior.EaseX>
+						<CubicEase EasingMode="EaseIn"/>
+					</ei:FluidMoveBehavior.EaseX>
+				</ei:FluidMoveBehavior>
+			</i:Interaction.Behaviors>
+			<TextBlock Text="{Binding Description}" VerticalAlignment="Bottom" Margin="0,0,0,-20" Foreground="White" FontFamily="Segoe UI" FontSize="16" TextAlignment="Center"/>
+			<Image Source="{Binding Image}"/>
+			<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-25,0,0" Foreground="White" FontFamily="Segoe UI" FontSize="18.667"/>
+			<TextBlock Text="{Binding Price}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-25,0,0" Foreground="White" FontFamily="Segoe UI" FontSize="18.667"/>
+		</Grid>
+	</Grid>
+</UserControl>
